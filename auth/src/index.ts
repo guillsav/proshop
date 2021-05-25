@@ -19,5 +19,4 @@ async function init() {
       🔉 Listening on port ${PORT}
       📭 API @ http://localhost:${PORT}`);
 }
-
 init();

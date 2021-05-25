@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
-import { apiErrorHandler, attachUser, notFound } from '../../src';
+import { apiErrorHandler, notFound } from '../../src';
 import routes from './routes';
 
 const app = express();
@@ -15,8 +15,7 @@ app.use(
   })
 );
 
-app.use(attachUser);
-app.use('/api/v1/products', routes);
+app.use('api/v1/auth', routes);
 app.use('*', notFound);
 app.use(apiErrorHandler);
 

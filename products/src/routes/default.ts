@@ -12,7 +12,7 @@ const defaultRouter = Router();
 defaultRouter.get('/', (_: Request, res: Response) =>
   res.status(200).json({
     success: true,
-    message: 'I am up and running... ⚡️⚡️⚡️⚡️⚡️⚡️⚡️'
+    message: '[PRODUCT-SERVICE]: up and running... ⚡️⚡️⚡️⚡️⚡️⚡️⚡️'
   })
 );
 
