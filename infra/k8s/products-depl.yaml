@@ -20,6 +20,11 @@ spec:
               value: '8082'
             - name: MOGO_URI
               value: 'mongodb://products-mongo-srv:27017/products'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service

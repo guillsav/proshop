@@ -9,7 +9,7 @@ const defaultRouter = Router();
  * @apiSuccess {String} code HTTP status code from API.
  * @apiSuccess {String} message Message from API.
  */
-defaultRouter.get('/', (req: Request, res: Response) =>
+defaultRouter.get('/', (_: Request, res: Response) =>
   res.status(200).json({
     success: true,
     message: 'I am up and running... ⚡️⚡️⚡️⚡️⚡️⚡️⚡️'

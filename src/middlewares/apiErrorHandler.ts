@@ -10,7 +10,7 @@ export const apiErrorHandler = (
   err: Error,
   req: Request,
   res: Response,
-  _next: NextFunction
+  _: NextFunction
 ): void => {
   const stack = process.env.NODE_ENV === 'production' ? null : err.stack;
 

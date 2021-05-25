@@ -1,0 +1,33 @@
+import { NextFunction, Request, Response } from 'express';
+import { config } from '../config';
+import { Token } from '../../src';
+
+interface UserPayload {
+  id: string;
+  email: string;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      currentUser?: UserPayload;
+    }
+  }
+}
+
+export const attachUser = (req: Request, _: Response, next: NextFunction) => {
+  if (!config.jwtKey) throw new Error('JWT_KEY must be defined!');
+
+  if (!req.session?.jwt) {
+    return next();
+  }
+
+  const key = config.jwtKey;
+
+  try {
+    const payload = Token.validateToken(req.session.jwt, key) as UserPayload;
+    req.currentUser = payload;
+  } catch (error) {}
+
+  next();
+};
