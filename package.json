@@ -1,0 +1,7 @@
+{
+  "name": "proshop-microservices",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Guillaume savy",
+  "license": "MIT"
+}
