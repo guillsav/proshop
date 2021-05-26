@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
-interface UserAttrs {
+export interface UserAttrs {
   name: string;
   email: string;
   password: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
 }
 
-interface UserDoc extends mongoose.Document {
+export interface UserDoc extends mongoose.Document {
   name: string;
   email: string;
   password: string;
