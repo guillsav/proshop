@@ -17,7 +17,7 @@ let mongo: MongoMemoryServer;
 beforeAll(async () => {
   mongo = new MongoMemoryServer();
 
-  config.jwtKey = process.env.JWT_KEY!;
+  config.jwtKey = 'secret';
 
   const mongoUri = await mongo.getUri();
 
@@ -41,12 +41,14 @@ afterAll(async () => {
 });
 
 global.signup = async () => {
+  const name = 'test';
   const email = 'test@test.com';
   const password = 'password';
 
   const response = await request(app)
     .post('/api/v1/auth/signup')
     .send({
+      name,
       email,
       password
     })

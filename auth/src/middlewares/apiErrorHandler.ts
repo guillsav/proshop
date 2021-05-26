@@ -12,14 +12,20 @@ export const apiErrorHandler = (
   res: Response,
   _: NextFunction
 ): void => {
-  const stack = process.env.NODE_ENV === 'production' ? null : err.stack;
+  const stack =
+    process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test'
+      ? null
+      : err.stack;
 
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'developement' ? err : {};
 
   const message = { message: err.message, stack };
-  logger.error(JSON.stringify(message));
+
+  if (req.app.get('env') === 'development') {
+    logger.error(JSON.stringify(message));
+  }
 
   // If error an instance of ApiError
   if (err instanceof ApiError) {
