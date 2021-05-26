@@ -1,13 +1,14 @@
-import { Request, Response, Router } from 'express';
-import statucCodes from 'http-status-codes';
-import { attachUser } from '../middlewares/attachUser';
-
-const { OK } = statucCodes;
+import { Router } from 'express';
+import { AuthController } from '../controllers';
+import { attachUser } from '../middlewares';
 
 const router = Router();
 
-router.get('/', attachUser, (req: Request, res: Response) => {
-  return res.status(OK).json({ currentUser: req.currentUser || null });
-});
+/**
+ * @desc    Get current user profile.
+ * @route   GET /api/v1/auth/profile
+ * @access  Private
+ */
+router.get('/', attachUser, AuthController.currentUser);
 
 export default router;

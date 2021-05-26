@@ -87,12 +87,22 @@ class AuthController {
 
       return res.status(OK).json(user);
     } catch (error) {
+      console.log(error);
       return next(
         ApiError.internal(
           "We've encounted an error while logging the user. Please try again later!"
         )
       );
     }
+  }
+
+  /**
+   * @desc    Get current user profile.
+   * @route   GET /api/v1/auth/profile
+   * @access  Private
+   */
+  currentUser(req: Request, res: Response) {
+    return res.status(OK).json(req.currentUser || null);
   }
 
   /**
