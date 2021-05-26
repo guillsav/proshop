@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from '../controllers';
-import { attachUser } from '../middlewares';
+import { asyncHandler, attachUser } from '../middlewares';
 
 const router = Router();
 
@@ -9,6 +9,6 @@ const router = Router();
  * @route   GET /api/v1/auth/profile
  * @access  Private
  */
-router.get('/', attachUser, AuthController.currentUser);
+router.get('/', attachUser, asyncHandler(AuthController.currentUser));
 
 export default router;

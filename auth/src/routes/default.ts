@@ -10,7 +10,7 @@ const router = Router();
  * @route   GET /api/v1/auth
  * @access  Public
  */
-router.get('/', async (req: Request, res: Response) =>
+router.get('/', async (_: Request, res: Response) =>
   res.status(OK).json({
     success: true,
     message: '[AUTH-SERVICE]: up and running... ⚡️⚡️⚡️⚡️⚡️⚡️⚡️'
