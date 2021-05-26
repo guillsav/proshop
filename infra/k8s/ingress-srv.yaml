@@ -10,13 +10,6 @@ spec:
     - host: proshop.dev
       http:
         paths:
-          #       - path: /api/users/?(.*)
-          #         pathType: Prefix
-          #         backend:
-          #           service:
-          #             name: auth-srv
-          #             port:
-          #               number: 3000
           - path: /api/v1/auth/?(.*)
             pathType: Prefix
             backend:
@@ -24,24 +17,3 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
-          # - path: /api/orders/?(.*)
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: orders-srv
-          #       port:
-          #         number: 3000
-          # - path: /api/payments/?(.*)
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: payments-srv
-          #       port:
-          #         number: 3000
-          # - path: /?(.*)
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: client-srv
-          #       port:
-          #         number: 3000
