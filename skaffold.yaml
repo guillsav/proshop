@@ -16,40 +16,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    # - image: guillsav/client
-    #   context: client
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: '**/*.js'
-    #         dest: .
     # - image: guillsav/proshop-products
     #   context: products
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: 'src/**/*.ts'
-    #         dest: .
-    # # - image: guillsav/orders
-    #   context: orders
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: 'src/**/*.ts'
-    #         dest: .
-    # - image: guillsav/expiration
-    #   context: expiration
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: 'src/**/*.ts'
-    #         dest: .
-    # - image: guillsav/payments
-    #   context: payments
     #   docker:
     #     dockerfile: Dockerfile
     #   sync:
