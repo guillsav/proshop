@@ -12,14 +12,13 @@ export const connectDatabase = async (): Promise<Database | undefined> => {
       useCreateIndex: true
     });
 
-    console.log(`
-    Connected to MongoDB 🔌🔌🔌
-    `);
+    console.info(`\nConnected to MongoDB 🔌🔌🔌`);
 
     return {
       users: db.collection<User>('users')
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    console.info(`\n❗❗❗🚨🚨 Failed to Connected to MongoDB 🚨🚨❗❗❗`);
   }
 };

@@ -87,7 +87,6 @@ class AuthController {
 
       return res.status(OK).json(user);
     } catch (error) {
-      console.log(error);
       return next(
         ApiError.internal(
           "We've encounted an error while logging the user. Please try again later!"

@@ -10,13 +10,8 @@ async function main(): Promise<void> {
 
   await connectDatabase();
 
-  const PORT = config.port;
+  app.listen(config.port);
 
-  app.listen(PORT);
-
-  console.log(`
-      🚀 Server is Running!
-      🔉 Listening on port ${PORT}
-      📭 API @ http://localhost:${PORT}`);
+  console.info(`🚀 [API IS RUNNING AT]: http://proshop.dev/api/v1/auth`);
 }
 main();
