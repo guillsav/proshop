@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { config } from '../config';
-import { Token } from '../helper';
+import { Token } from '../helpers';
 
 interface UserPayload {
   id: string;

@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Password } from '../helper';
+import { Password } from '../helpers';
 
 export interface UserAttrs {
   name: string;

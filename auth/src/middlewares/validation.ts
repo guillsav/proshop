@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import * as Yup from 'yup';
-import { validate } from '../helper';
+import { validate } from '../helpers';
 
 export const registerValidation = async (
   req: Request,
