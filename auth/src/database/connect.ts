@@ -2,13 +2,11 @@ import mongoose from 'mongoose';
 import { config } from '../config';
 import { Database, User } from '../lib';
 
-export const connectDatabase = async (
-  uri: string
-): Promise<Database | undefined> => {
+export const connectDatabase = async (): Promise<Database | undefined> => {
   try {
     const {
       connection: { db }
-    } = await mongoose.connect(config.mongoURI || uri, {
+    } = await mongoose.connect(config.mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
