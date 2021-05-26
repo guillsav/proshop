@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import statusCodes from 'http-status-codes';
 import { config } from '../config';
 import { UserService } from '../services';
-import { Password, Token } from '../helper';
+import { Password, Token } from '../helpers';
 import { ApiError } from '.';
 import { UserDoc } from '../model';
 
