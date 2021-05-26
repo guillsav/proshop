@@ -17,7 +17,7 @@ let mongo: MongoMemoryServer;
 beforeAll(async () => {
   mongo = new MongoMemoryServer();
 
-  config.jwtKey = process.env.JWT_KEY!;
+  config.jwtKey = 'secret';
 
   const mongoUri = await mongo.getUri();
 
