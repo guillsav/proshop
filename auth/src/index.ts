@@ -8,7 +8,7 @@ async function main(): Promise<void> {
   if (!config.mongoURI) throw new Error(`MONGO_URI must be defined`);
   if (!config.jwtKey) throw new Error(`JWT_KEY must be defined`);
 
-  await connectDatabase(config.mongoURI);
+  await connectDatabase();
 
   const PORT = config.port;
 
