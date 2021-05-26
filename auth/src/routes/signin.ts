@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AuthController } from '../controllers';
-import { loginValidation } from '../middlewares';
+import { asyncHandler, loginValidation } from '../middlewares';
 
 const router = Router();
 
@@ -9,6 +9,6 @@ const router = Router();
  * @route   POST /api/v1/auth/signin
  * @access  Public
  */
-router.post('/', loginValidation, AuthController.login);
+router.post('/', loginValidation, asyncHandler(AuthController.login));
 
 export default router;
