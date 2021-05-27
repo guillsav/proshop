@@ -1,30 +1,37 @@
-import { NextFunction, Request, Response } from 'express';
+import * as express from 'express';
+import { Body, Controller, Get, Post, Request, Res } from 'tsoa';
 import statusCodes from 'http-status-codes';
 import { config } from '../config';
 import { UserService } from '../services';
 import { Password, Token } from '../helpers';
 import { ApiError } from '.';
-import { UserDoc } from '../model';
+import { UserAttrs, UserDoc } from '../model';
+
+declare global {
+  namespace NodeJS {
+    interface Request {
+      currentUser: UserDoc | null;
+    }
+  }
+}
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
 
-class AuthController {
+class AuthController extends Controller {
   /**
    * @desc    Register new users.
    * @route   POST /api/v1/auth/signup
    * @access  Public
    */
-  async register(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void | Response<UserDoc, Record<string, UserDoc>>> {
+  @Post('/')
+  public async register(
+    @Request() req: express.Request,
+    @Res() res: express.Response,
+    next: express.NextFunction,
+    @Body() body: UserAttrs
+  ) {
     try {
-      const {
-        name,
-        email,
-        password
-      }: { name: string; email: string; password: string } = req.body;
+      const { name, email, password } = body;
 
       const existingUser = await UserService.findUser(email);
 
@@ -57,13 +64,15 @@ class AuthController {
    * @route   POST /api/v1/auth/signin
    * @access  Public
    */
-  async login(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void | Response<UserDoc, Record<string, UserDoc>>> {
+  @Post('/')
+  public async login(
+    @Request() req: express.Request,
+    @Res() res: express.Response,
+    next: express.NextFunction,
+    @Body() body: { email: string; password: string }
+  ) {
     try {
-      const { email, password }: { email: string; password: string } = req.body;
+      const { email, password } = body;
 
       const user = await UserService.findUser(email);
 
@@ -100,7 +109,11 @@ class AuthController {
    * @route   GET /api/v1/auth/profile
    * @access  Private
    */
-  currentUser(req: Request, res: Response) {
+  @Get('/')
+  public currentUser(
+    @Request() req: express.Request,
+    @Res() res: express.Response
+  ) {
     return res.status(OK).json(req.currentUser || null);
   }
 
@@ -109,7 +122,11 @@ class AuthController {
    * @route   POST /api/v1/auth/signout
    * @access  Public
    */
-  async logout(req: Request, res: Response): Promise<void> {
+  @Post('/')
+  public async logout(
+    @Request() req: express.Request,
+    @Res() res: express.Response
+  ) {
     req.session = null;
     return res.status(NO_CONTENT).end();
   }
