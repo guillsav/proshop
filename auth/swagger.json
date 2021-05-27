@@ -42,20 +42,37 @@
       }
     },
     "/signup": {
-      "parameters": [
-        {
-          "in": "body",
-          "name": "body",
-          "example": {
-            "name": "Andrew D.",
-            "email": "drew@test.com",
-            "password": "Pa$sword1"
-          }
-        }
-      ],
       "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["name", "email", "password"],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "name": "Andrew D.",
+              "email": "drew@test.com",
+              "password": "Pa$sword1"
+            }
+          }
+        ],
         "tags": ["Users"],
-        "summary": "Register new users to Proshop.",
+        "summary": "Creates a new user.",
         "responses": {
           "201": {
             "description": "Returns a 201 ok on successful signup",
@@ -96,17 +113,29 @@
       }
     },
     "/signin": {
-      "parameters": [
-        {
-          "in": "body",
-          "name": "body",
-          "example": {
-            "email": "drew@test.com",
-            "password": "Pa$sword1"
-          }
-        }
-      ],
       "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "required": ["email", "password"],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            },
+            "example": {
+              "email": "drew@test.com",
+              "password": "Pa$sword1"
+            }
+          }
+        ],
         "tags": ["Users"],
         "summary": "Log registered users to Proshop.",
         "responses": {
@@ -142,6 +171,22 @@
                 "example": {
                   "message": "User not found."
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signout": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Logs users out of Proshop",
+        "responses": {
+          "204": {
+            "description": "clears the cookie and returns a 204 on successful signout",
+            "content": {
+              "application/json": {
+                "example": {}
               }
             }
           }
