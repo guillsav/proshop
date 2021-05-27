@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "main": "./src/index.ts",
   "author": "Guillaume Savy",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p ./",
     "start": "ts-node-dev --poll ./src/index.ts",
     "start:dev": "nodemon ./src/index.ts",
     "test": "jest --watchAll --no-cache",
-    "seed": "ts-node-dev ./src/database/seed.ts",
-    "clear": "ts-node temp/clear.ts"
+    "generate": "tsoa swagger"
   },
   "jest": {
     "preset": "ts-jest",
@@ -30,7 +30,9 @@
     "mongoose": "^5.12.11",
     "mongoose-update-if-current": "^1.4.0",
     "morgan": "^1.10.0",
+    "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.1.6",
+    "tsoa": "^3.8.0",
     "winston": "^3.3.3",
     "yup": "^0.32.9"
   },
@@ -45,6 +47,7 @@
     "@types/morgan": "^1.9.2",
     "@types/node": "^15.6.0",
     "@types/supertest": "^2.0.11",
+    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "dotenv": "^10.0.0",
