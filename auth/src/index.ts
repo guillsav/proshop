@@ -12,6 +12,9 @@ async function main(): Promise<void> {
 
   app.listen(config.port);
 
-  console.info(`🚀 [API IS RUNNING AT]: http://proshop.dev/api/v1/auth`);
+  console.info(`
+  🚀 [API IS RUNNING AT]: https://proshop.dev/api/v1/auth
+  📖 [API DOCUMENTATION AT]: http://proshop.dev/api/v1/auth/api-docs
+  `);
 }
 main();
