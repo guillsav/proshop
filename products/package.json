@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "main": "./src/index.ts",
   "author": "Guillaume Savy",
+  "type": "module",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p ./",
-    "start": "node ./src/index.ts",
+    "start": "ts-node-dev --poll ./src/index.ts",
     "start:dev": "nodemon ./src/index.ts",
     "test": "jest --watchAll --no-cache",
-    "seed": "ts-node temp/seed.ts",
-    "clear": "ts-node temp/clear.ts"
+    "generate": "tsoa swagger"
   },
   "jest": {
     "preset": "ts-jest",

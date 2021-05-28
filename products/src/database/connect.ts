@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { config } from '../config';
-import { Database, User } from '../lib';
+import { Database, Product, Review } from '../lib';
 
 export const connectDatabase = async (): Promise<Database | undefined> => {
   try {
@@ -15,7 +15,8 @@ export const connectDatabase = async (): Promise<Database | undefined> => {
     console.info(`\nConnected to MongoDB 🔌🔌🔌`);
 
     return {
-      users: db.collection<User>('users')
+      products: db.collection<Product>('products'),
+      reviews: db.collection<Review>('reviews')
     };
   } catch (error) {
     console.error(error);
