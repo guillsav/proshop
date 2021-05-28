@@ -4,11 +4,17 @@ export class Token {
   /**
    * @param id
    * @param email
+   * @param isAdmin
    * @param key
    * @returns string
    */
-  static generateToken(id: string, email: string, key: string): string {
-    return jwt.sign({ id, email }, key);
+  static generateToken(
+    id: string,
+    email: string,
+    isAdmin: boolean,
+    key: string
+  ): string {
+    return jwt.sign({ id, email, isAdmin }, key);
   }
 
   /**

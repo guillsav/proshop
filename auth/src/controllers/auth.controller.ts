@@ -31,7 +31,7 @@ class AuthController extends Controller {
     @Body() body: UserAttrs
   ) {
     try {
-      const { name, email, password } = body;
+      const { name, email, password, isAdmin } = body;
 
       const existingUser = await UserService.findUser(email);
 
@@ -39,11 +39,12 @@ class AuthController extends Controller {
         return next(ApiError.badRequest('Email already in use'));
       }
 
-      const user = await UserService.signup({ name, email, password });
+      const user = await UserService.signup({ name, email, password, isAdmin });
 
       const userJwt = Token.generateToken(
         user.id,
         user.email,
+        user.isAdmin,
         config.jwtKey || process.env.JWT_KEY!
       );
 
@@ -89,6 +90,7 @@ class AuthController extends Controller {
       const userJwt = Token.generateToken(
         user.id,
         user.email,
+        user.isAdmin,
         config.jwtKey || process.env.JWT_KEY!
       );
 

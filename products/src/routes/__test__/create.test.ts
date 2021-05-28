@@ -1,6 +1,5 @@
 import request from 'supertest';
 import app from '../../app';
-import { Product } from '../../model';
 
 it('has a route handler listening to /api/v1/products for post requests to create or add a new product', async () => {
   const response = await request(app).post('/api/v1/products/create').send({});
@@ -27,9 +26,31 @@ it('returns a 422 validation error if the request body has an invalid input or m
   const response = await request(app)
     .post('/api/v1/products/create')
     .set('Cookie', global.signin(true))
-    .send({});
-
-  console.log(response);
+    .send({
+      name: 1,
+      price: 0,
+      image: 'Sample image',
+      brand: 'Sample brand',
+      category: 'Sample category',
+      countInStock: 0,
+      description: 'Sample description'
+    });
 
   expect(response.status).toEqual(422);
+});
+
+it('creates a product with valid inputs', async () => {
+  await request(app)
+    .post('/api/v1/products/create')
+    .set('Cookie', global.signin(true))
+    .send({
+      name: 'Sample name',
+      price: 0,
+      image: 'Sample image',
+      brand: 'Sample brand',
+      category: 'Sample category',
+      countInStock: 0,
+      description: 'Sample description'
+    })
+    .expect(201);
 });

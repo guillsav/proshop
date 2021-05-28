@@ -9,7 +9,7 @@ export async function validate(
   next: NextFunction
 ) {
   try {
-    const result = await schema.validate(body);
+    const result = await schema.validate(body, { abortEarly: false });
     if (result) {
       req.body = result;
       return next();
