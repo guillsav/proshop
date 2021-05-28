@@ -1,8 +1,11 @@
 import { Router } from 'express';
+import { restricted } from '../middlewares';
 import defaultRouter from './default';
+import createRouter from './create';
 
-const routes = Router();
+const router = Router();
 
-routes.use('/', defaultRouter);
+router.use('/', defaultRouter);
+router.use('/create', restricted, createRouter);
 
-export default routes;
+export default router;

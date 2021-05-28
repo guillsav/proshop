@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieSession from 'cookie-session';
-import { apiErrorHandler, attachUser, notFound } from '../../src';
+import { apiErrorHandler, attachUser, notFound } from './middlewares';
 import routes from './routes';
 
 const app = express();

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import { reviewSchema } from './review';
 
-interface ProductAttrs {
+export interface ProductAttrs {
   name: string;
   image: string;
   brand: string;
@@ -13,7 +13,7 @@ interface ProductAttrs {
   userId: string;
 }
 
-interface ProductDoc extends mongoose.Document {
+export interface ProductDoc extends mongoose.Document {
   name: string;
   image: string;
   brand: string;
