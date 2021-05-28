@@ -3,7 +3,7 @@ import statusCodes from 'http-status-codes';
 import { Body, Controller, Post, Request, Res } from 'tsoa';
 import { ApiError } from '.';
 import { ProductService } from '../services';
-import { Product, ProductAttrs } from '../model';
+import { ProductAttrs } from '../model';
 
 const { OK } = statusCodes;
 
@@ -16,7 +16,7 @@ class ProductController extends Controller {
     @Body() body: ProductAttrs
   ) {
     try {
-      const product = await ProductService.create(body, req.currentUser!.id);
+      const product = await ProductService.add(body, req.currentUser!.id);
 
       return res.status(OK).json(product);
     } catch (error) {

@@ -1,6 +1,6 @@
 import { Product, ProductAttrs, ProductDoc } from '../model';
 
-const create = async (
+const add = async (
   attrs: ProductAttrs,
   userId: string
 ): Promise<ProductDoc> => {
@@ -21,4 +21,4 @@ const create = async (
   return product;
 };
 
-export default { create };
+export default { add };

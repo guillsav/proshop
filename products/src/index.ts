@@ -3,21 +3,18 @@ import { config } from './config';
 import app from './app';
 import { connectDatabase } from './database';
 
-async function init() {
-  if (!config.port) throw new Error(`PORT  must be defined`);
+async function main(): Promise<void> {
+  if (!config.port) throw new Error(`PORT must be defined`);
   if (!config.mongoURI) throw new Error(`MONGO_URI must be defined`);
   if (!config.jwtKey) throw new Error(`JWT_KEY must be defined`);
 
   await connectDatabase();
 
-  const PORT = config.port;
+  app.listen(config.port);
 
-  app.listen(PORT);
-
-  console.log(`
-      🚀 Server is Running!
-      🔉 Listening on port ${PORT}
-      📭 API @ http://localhost:${PORT}`);
+  console.info(`
+  🚀 [API IS RUNNING AT]: https://proshop.dev/api/v1/products
+  📖 [API DOCUMENTATION AT]: http://proshop.dev/api/v1/products/api-docs
+  `);
 }
-
-init();
+main();

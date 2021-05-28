@@ -6,7 +6,7 @@ import { Token } from '../helpers';
 declare global {
   namespace NodeJS {
     interface Global {
-      signin(): string[];
+      signin(isAdmin?: boolean): string[];
     }
   }
 }
@@ -39,11 +39,12 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-global.signin = () => {
+global.signin = (isAdmin?: boolean) => {
   /* Build a JWT payload. {id, email} */
   const payload = {
     id: new mongoose.Types.ObjectId().toHexString(),
-    email: 'test@test.com'
+    email: 'test@test.com',
+    isAdmin
   };
 
   /* Build up session object. {jwt: MY_JWT} */
