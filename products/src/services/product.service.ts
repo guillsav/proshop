@@ -21,4 +21,9 @@ const add = async (
   return product;
 };
 
-export default { add };
+const fetch = async (): Promise<ProductDoc[]> => {
+  const products = await Product.find({});
+  return products;
+};
+
+export default { add, fetch };

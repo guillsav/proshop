@@ -6,8 +6,8 @@ const findUser = async (email: string): Promise<UserDoc | undefined> => {
 };
 
 const signup = async (attrs: UserAttrs): Promise<UserDoc> => {
-  const { name, email, password } = attrs;
-  const user = await User.build({ name, email, password }).save();
+  const { name, email, password, isAdmin } = attrs;
+  const user = await User.build({ name, email, password, isAdmin }).save();
   return user;
 };
 

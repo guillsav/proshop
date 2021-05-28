@@ -44,11 +44,16 @@ global.signin = (isAdmin?: boolean) => {
   const payload = {
     id: new mongoose.Types.ObjectId().toHexString(),
     email: 'test@test.com',
-    isAdmin
+    isAdmin: isAdmin ? isAdmin : false
   };
 
   /* Build up session object. {jwt: MY_JWT} */
-  const token = Token.generateToken(payload.id, payload.email, config.jwtKey);
+  const token = Token.generateToken(
+    payload.id,
+    payload.email,
+    payload.isAdmin,
+    config.jwtKey
+  );
 
   /* Build up session object. {jwt: MY_JWT} */
   const session = { jwt: token };

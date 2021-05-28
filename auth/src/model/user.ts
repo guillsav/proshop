@@ -12,7 +12,7 @@ export interface UserDoc extends mongoose.Document {
   name: string;
   email: string;
   password: string;
-  isAdming: boolean;
+  isAdmin: boolean;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
     isAdmin: {
       type: Boolean,
       required: true,
-      default: false
+      default: true
     }
   },
   {
