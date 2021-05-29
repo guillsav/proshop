@@ -1,7 +1,7 @@
 {
   "entryFile": "src/app.ts",
   "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/controllers/**/*auth.controller.ts"],
+  "controllerPathGlobs": ["src/controllers/**/*products.controller.ts"],
   "spec": {
     "outputDirectory": ".",
     "specVersion": 3
