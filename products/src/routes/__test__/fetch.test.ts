@@ -1,6 +1,5 @@
 import request from 'supertest';
 import app from '../../app';
-import { ProductAttrs } from '../../model';
 
 interface IProduct {
   name: string;
