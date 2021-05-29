@@ -1,12 +1,30 @@
+import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import app from '../app';
 import { config } from '../config';
 import { Token } from '../helpers';
+import { ProductDoc } from '../model';
+
+interface IProduct {
+  name: string;
+  brand: string;
+  category: string;
+  countInStock: number;
+  description: string;
+  image: string;
+  price: number;
+}
 
 declare global {
   namespace NodeJS {
     interface Global {
       signin(isAdmin?: boolean): string[];
+      createProducts(
+        prodAttrs: IProduct,
+        total: number,
+        cookie: string[]
+      ): Promise<ProductDoc[]>;
     }
   }
 }
@@ -65,4 +83,34 @@ global.signin = (isAdmin?: boolean) => {
 
   /* Return a string thats the cookie with the encoded data */
   return ['express:sess=' + base64];
+};
+
+global.createProducts = async (
+  prodAttrs: IProduct,
+  total: number,
+  cookie: string[]
+) => {
+  const { name, brand, category, countInStock, description, image, price } =
+    prodAttrs;
+
+  let products: ProductDoc[] = [];
+
+  for (let i = 0; i < total; i++) {
+    const { body }: { body: ProductDoc } = await request(app)
+      .post('/api/v1/products/create')
+      .set('Cookie', cookie)
+      .send({
+        name,
+        brand,
+        category,
+        countInStock,
+        description,
+        image,
+        price
+      });
+
+    products.push(body);
+  }
+
+  return products;
 };

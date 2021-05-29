@@ -15,6 +15,18 @@ export interface Product {
   version?: number;
 }
 
+export interface UpdateProductAttrs {
+  name?: string;
+  image?: string;
+  description?: string;
+  brand?: string;
+  category?: string;
+  price?: number;
+  countInStock?: number;
+  rating?: number;
+  numReviews?: number;
+}
+
 export interface Review {
   _id?: string;
   name: string;

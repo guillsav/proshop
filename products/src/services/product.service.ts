@@ -1,3 +1,4 @@
+import { UpdateProductAttrs } from '../lib';
 import { Product, ProductAttrs, ProductDoc } from '../model';
 
 const add = async (
@@ -26,4 +27,22 @@ const fetch = async (): Promise<ProductDoc[]> => {
   return products;
 };
 
-export default { add, fetch };
+const find = async (id: string): Promise<ProductDoc | null> => {
+  const product = await Product.findById(id);
+  return product || null;
+};
+
+const update = async (
+  updateAttrs: UpdateProductAttrs,
+  product: ProductDoc
+): Promise<ProductDoc> => {
+  await product.set({ ...updateAttrs }).save();
+  return product;
+};
+
+const remove = async (product: ProductDoc) => {
+  await product.delete();
+  return true;
+};
+
+export default { add, fetch, find, update, remove };

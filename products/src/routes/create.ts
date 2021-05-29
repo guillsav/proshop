@@ -14,9 +14,9 @@ const router = Router();
 router.post(
   '/',
   createProductValidation,
-  asyncHandler((req: Request, res: Response, next: NextFunction) => {
-    return ProductsController.create(req, res, next, req.body);
-  })
+  asyncHandler((req: Request, res: Response, next: NextFunction) =>
+    ProductsController.create(req, res, next, req.body)
+  )
 );
 
 export default router;
