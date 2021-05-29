@@ -1,20 +1,20 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { ProductsController } from '../controllers';
-import { asyncHandler } from '../middlewares';
+import { ProductsController } from '../../controllers';
+import { asyncHandler } from '../../middlewares';
 
 const router = Router();
 
 /**
- * @api {GET} /api/v1/products/all
- * @apiName Fetch all products
+ * @api {DELETE} /api/v1/products/delete/:id
+ * @apiName Delete product
  * @apiGroup Products
  * @apiSuccess {Number} code HTTP status code from API.
- * @apiSuccess {Array} List of products.
+ * @apiSuccess {} No content.
  */
-router.get(
-  '/',
+router.delete(
+  '/:id',
   asyncHandler((req: Request, res: Response, next: NextFunction) =>
-    ProductsController.findAll(req, res, next)
+    ProductsController.delete(req, res, next)
   )
 );
 

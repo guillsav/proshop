@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { asyncHandler, createProductValidation } from '../middlewares';
-import { ProductsController } from '../controllers';
+import { asyncHandler, createProductValidation } from '../../middlewares';
+import { ProductsController } from '../../controllers';
 
 const router = Router();
 

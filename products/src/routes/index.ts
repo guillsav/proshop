@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { restricted } from '../middlewares';
-import createRouter from './create';
-import defaultRouter from './default';
-import fetchRouter from './fetch';
-import showRouter from './show';
-import updateRouter from './update';
-import deleteRouter from './delete';
+import {
+  createRouter,
+  defaultRouter,
+  deleteRouter,
+  fetchRouter,
+  showRouter,
+  updateRouter
+} from './products';
 
 const router = Router();
 
