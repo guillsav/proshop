@@ -4,9 +4,17 @@ import { Body, Controller, Delete, Get, Post, Put, Request, Res } from 'tsoa';
 import { ApiError } from '.';
 import { ProductService } from '../services';
 import { ProductAttrs } from '../model';
-import { UpdateProductAttrs } from '../lib';
+import { UpdateProductAttrs, UserDoc } from '../lib';
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
+
+declare global {
+  namespace NodeJS {
+    interface Request {
+      currentUser: UserDoc | null;
+    }
+  }
+}
 
 class ProductController extends Controller {
   @Post('/')

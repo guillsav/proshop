@@ -38,3 +38,10 @@ export interface Database {
   products: Collection<Product>;
   reviews: Collection<Review>;
 }
+
+export interface UserDoc {
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+}
