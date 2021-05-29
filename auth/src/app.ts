@@ -7,6 +7,11 @@ import { apiErrorHandler, notFound, removeHeader } from './middlewares';
 import routes from './routes';
 
 const app = express();
+const cookieOptions = cookieSession({
+  httpOnly: true,
+  signed: false,
+  secure: process.env.NODE_ENV !== 'test'
+});
 
 app.set('trust proxy', true);
 app.use(express.json());
@@ -21,13 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(
-  cookieSession({
-    httpOnly: true,
-    signed: false,
-    secure: process.env.NODE_ENV !== 'test'
-  })
-);
+app.use(cookieOptions);
 app.use('/api/v1/auth', routes);
 app.use('*', notFound);
 app.use(apiErrorHandler);
