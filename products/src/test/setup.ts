@@ -90,24 +90,13 @@ global.createProducts = async (
   total: number,
   cookie: string[]
 ) => {
-  const { name, brand, category, countInStock, description, image, price } =
-    prodAttrs;
-
   let products: ProductDoc[] = [];
 
   for (let i = 0; i < total; i++) {
     const { body }: { body: ProductDoc } = await request(app)
       .post('/api/v1/products/create')
       .set('Cookie', cookie)
-      .send({
-        name,
-        brand,
-        category,
-        countInStock,
-        description,
-        image,
-        price
-      });
+      .send({ ...prodAttrs });
 
     products.push(body);
   }
