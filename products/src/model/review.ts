@@ -1,16 +1,18 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
-interface ReviewAttrs {
+export interface ReviewAttrs {
   name: string;
   rating: number;
   comment: string;
+  product: string;
 }
 
-interface ReviewDoc extends mongoose.Document {
+export interface ReviewDoc extends mongoose.Document {
   name: string;
   rating: string;
   comment: string;
+  product: string;
   version: number;
 }
 
@@ -31,6 +33,11 @@ export const reviewSchema = new mongoose.Schema(
     comment: {
       type: String,
       required: true
+    },
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'products'
     }
   },
   {

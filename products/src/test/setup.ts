@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import app from '../app';
 import { config } from '../config';
 import { Token } from '../helpers';
-import { ProductDoc } from '../model';
+import { ReviewAttrs } from '../model';
 
 interface IProduct {
   name: string;
@@ -24,7 +24,12 @@ declare global {
         prodAttrs: IProduct,
         total: number,
         cookie: string[]
-      ): Promise<ProductDoc[]>;
+      ): Promise<void>;
+      createReviews(
+        reviewAttrs: ReviewAttrs,
+        total: number,
+        cookie: string[]
+      ): Promise<void>;
     }
   }
 }
@@ -90,16 +95,23 @@ global.createProducts = async (
   total: number,
   cookie: string[]
 ) => {
-  let products: ProductDoc[] = [];
-
   for (let i = 0; i < total; i++) {
-    const { body }: { body: ProductDoc } = await request(app)
+    await request(app)
       .post('/api/v1/products/create')
       .set('Cookie', cookie)
       .send({ ...prodAttrs });
-
-    products.push(body);
   }
+};
 
-  return products;
+global.createReviews = async (
+  reviewAttrs: ReviewAttrs,
+  total: number,
+  cookie: string[]
+) => {
+  for (let i = 0; i < total; i++) {
+    await request(app)
+      .post('/api/v1/reviews/create')
+      .set('Cookie', cookie)
+      .send({ ...reviewAttrs });
+  }
 };

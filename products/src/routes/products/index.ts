@@ -1,6 +1,5 @@
-export { default as createRouter } from './create';
-export { default as defaultRouter } from './default';
-export { default as deleteRouter } from './delete';
-export { default as fetchRouter } from './fetch';
-export { default as showRouter } from './show';
-export { default as updateRouter } from './update';
+export { default as createProductRouter } from './create';
+export { default as deleteProductRouter } from './delete';
+export { default as fetchProductsRouter } from './fetch';
+export { default as showProductRouter } from './show';
+export { default as updateProductRouter } from './update';
