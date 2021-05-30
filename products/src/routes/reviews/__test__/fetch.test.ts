@@ -8,14 +8,15 @@ it('can fetch a list of reviews', async () => {
       name: 'Sample name',
       rating: 4,
       comment: 'Sample comment',
-      product: new mongoose.Types.ObjectId().toHexString()
+      product: new mongoose.Types.ObjectId().toHexString(),
+      user: ''
     },
     3,
     global.signin()
   );
 
   const response = await request(app)
-    .get('/api/v1/reviews/all')
+    .get('/api/v1/products/reviews/all')
     .send()
     .expect(200);
 

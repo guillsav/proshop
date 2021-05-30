@@ -16,6 +16,7 @@ router.use('/signout', signoutRouter);
 
 try {
   const swaggerDoc = require('../../swagger.json');
+
   router.use(
     '/api-docs',
     swaggerUI.serve,
