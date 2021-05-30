@@ -1,21 +1,24 @@
 import { Router } from 'express';
 import { restricted } from '../middlewares';
+import defaultRouter from './default';
 import {
-  createRouter,
-  defaultRouter,
-  deleteRouter,
-  fetchRouter,
-  showRouter,
-  updateRouter
+  createProductRouter,
+  deleteProductRouter,
+  fetchProductsRouter,
+  showProductRouter,
+  updateProductRouter
 } from './products';
+import { createReviewRouter, fetchReviewsRouter } from './reviews';
 
 const router = Router();
 
 router.use('/', defaultRouter);
-router.use('/all', fetchRouter);
-router.use('/', showRouter);
-router.use('/create', restricted, createRouter);
-router.use('/update', restricted, updateRouter);
-router.use('/delete', restricted, deleteRouter);
+router.use('/products/all', fetchProductsRouter);
+router.use('/products', showProductRouter);
+router.use('/products/create', restricted, createProductRouter);
+router.use('/products/update', restricted, updateProductRouter);
+router.use('/products/delete', restricted, deleteProductRouter);
+router.use('/reviews/create', createReviewRouter);
+router.use('/reviews/all', fetchReviewsRouter);
 
 export default router;

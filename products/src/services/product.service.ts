@@ -23,7 +23,7 @@ const add = async (
 };
 
 const fetch = async (): Promise<ProductDoc[]> => {
-  const products = await Product.find({});
+  const products = await Product.find({}).populate('reviews');
   return products;
 };
 

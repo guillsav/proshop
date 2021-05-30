@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cookieOptions);
-app.use('/api/v1/products', attachUser, routes);
+app.use('/api/v1', attachUser, routes);
 app.use('*', notFound);
 app.use(apiErrorHandler);
 
