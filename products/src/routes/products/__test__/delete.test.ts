@@ -49,7 +49,7 @@ it('returns a 401 not authorized error if the user is not the one that created t
     .expect(401);
 });
 
-it('returns a 204 no content on successful update', async () => {
+it('returns a 204 no content on successful delete', async () => {
   await request(app)
     .delete(`/api/v1/products/delete/${id}`)
     .set('Cookie', cookie)
