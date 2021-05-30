@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import app from '../app';
 import { config } from '../config';
 import { Token } from '../helpers';
-import { ReviewAttrs } from '../model';
+import { ProductDoc, ReviewAttrs, ReviewDoc } from '../model';
 
 interface IProduct {
   name: string;
@@ -24,12 +24,12 @@ declare global {
         prodAttrs: IProduct,
         total: number,
         cookie: string[]
-      ): Promise<void>;
+      ): Promise<ProductDoc[]>;
       createReviews(
         reviewAttrs: ReviewAttrs,
         total: number,
         cookie: string[]
-      ): Promise<void>;
+      ): Promise<ReviewDoc[]>;
     }
   }
 }
@@ -95,12 +95,17 @@ global.createProducts = async (
   total: number,
   cookie: string[]
 ) => {
+  let products: ProductDoc[] = [];
+
   for (let i = 0; i < total; i++) {
-    await request(app)
+    const { body }: { body: ProductDoc } = await request(app)
       .post('/api/v1/products/create')
       .set('Cookie', cookie)
       .send({ ...prodAttrs });
+
+    products.push(body);
   }
+  return products;
 };
 
 global.createReviews = async (
@@ -108,10 +113,16 @@ global.createReviews = async (
   total: number,
   cookie: string[]
 ) => {
+  let reviews: ReviewDoc[] = [];
+
   for (let i = 0; i < total; i++) {
-    await request(app)
+    const { body }: { body: ReviewDoc } = await request(app)
       .post('/api/v1/reviews/create')
       .set('Cookie', cookie)
       .send({ ...reviewAttrs });
+
+    reviews.push(body);
   }
+
+  return reviews;
 };

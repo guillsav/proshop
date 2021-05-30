@@ -6,6 +6,7 @@ export interface ReviewAttrs {
   rating: number;
   comment: string;
   product: string;
+  user: string;
 }
 
 export interface ReviewDoc extends mongoose.Document {
@@ -13,6 +14,7 @@ export interface ReviewDoc extends mongoose.Document {
   rating: string;
   comment: string;
   product: string;
+  user: string;
   version: number;
 }
 
@@ -38,6 +40,10 @@ export const reviewSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'products'
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
     }
   },
   {

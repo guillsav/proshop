@@ -8,7 +8,11 @@ import {
   showProductRouter,
   updateProductRouter
 } from './products';
-import { createReviewRouter, fetchReviewsRouter } from './reviews';
+import {
+  createReviewRouter,
+  deleteReviewRouter,
+  fetchReviewsRouter
+} from './reviews';
 
 const router = Router();
 
@@ -20,5 +24,6 @@ router.use('/products/update', restricted, updateProductRouter);
 router.use('/products/delete', restricted, deleteProductRouter);
 router.use('/reviews/create', createReviewRouter);
 router.use('/reviews/all', fetchReviewsRouter);
+router.use('/reviews/delete', deleteReviewRouter);
 
 export default router;
