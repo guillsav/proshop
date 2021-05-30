@@ -117,7 +117,7 @@ global.createReviews = async (
 
   for (let i = 0; i < total; i++) {
     const { body }: { body: ReviewDoc } = await request(app)
-      .post('/api/v1/reviews/create')
+      .post('/api/v1/products/reviews/create')
       .set('Cookie', cookie)
       .send({ ...reviewAttrs });
 

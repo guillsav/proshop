@@ -24,7 +24,7 @@
   "paths": {
     "/": {
       "get": {
-        "tags": ["Users"],
+        "tags": ["Default"],
         "summary": "Entry point to auth-service for the Proshop API",
         "responses": {
           "200": {
@@ -215,6 +215,10 @@
     }
   },
   "tags": [
+    {
+      "name": "Default",
+      "description": "API entry point."
+    },
     {
       "name": "Users",
       "description": "API to authenticate users in the system."

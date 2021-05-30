@@ -1,0 +1,64 @@
+{
+  "components": {
+    "examples": {},
+    "headers": {},
+    "parameters": {},
+    "requestBodies": {},
+    "responses": {},
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "info": {
+    "title": "products-service-api",
+    "description": "Documentation for the Products service for the Proshop app.",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "contact": {
+      "name": "Guillaume Savy"
+    }
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Default"],
+        "summary": "Entry point to products-service for the Proshop API",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "[PRODUCTS-SERVICE]: up and running... ⚡️⚡️⚡️⚡️⚡️⚡️⚡️"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Default",
+      "description": "API entry point"
+    },
+    {
+      "name": "Products",
+      "description": "API to manage products ressources in the system"
+    },
+    {
+      "name": "Reviews",
+      "description": "API to manage reviews ressources in the system"
+    }
+  ],
+  "servers": [
+    {
+      "url": "/api/v1/products"
+    }
+  ]
+}

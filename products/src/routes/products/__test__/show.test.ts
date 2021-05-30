@@ -30,7 +30,7 @@ it('returns a 200 ok if the product is found', async () => {
     .expect(201);
 
   await request(app)
-    .get(`/api/v1/products/${id}`)
+    .get(`/api/v1/products/show/${id}`)
     .set('Cookie', global.signin())
     .send()
     .expect(200);
