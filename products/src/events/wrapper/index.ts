@@ -32,6 +32,14 @@ class AmqpWrapper {
 
     return this;
   }
+
+  close() {
+    if (this.conn) {
+      setTimeout(() => {
+        this.conn!.close();
+      }, 1000);
+    }
+  }
 }
 
 export const amqpWrapper = new AmqpWrapper().init(config.rabbitmqUrl);

@@ -1,12 +1,14 @@
 import { Channel } from 'amqplib';
-import { Queues } from '../../types';
+import { Queues, Topics } from '../../types';
 
 interface Event {
+  topic: Topics;
   queue: Queues;
   data: any;
 }
 
 abstract class Publisher<T extends Event> {
+  abstract topic: T['topic'];
   abstract queue: T['queue'];
 
   constructor(protected ch?: Channel) {}
@@ -29,7 +31,8 @@ abstract class Publisher<T extends Event> {
         this.ch.assertQueue(this.queue, { durable: true });
         this.ch.sendToQueue(this.queue, data);
 
-        console.log('Event published to queue', this.queue);
+        console.log(`[Message sent]: ${this.topic} / ${this.queue}`);
+
         resolve();
       } catch (err) {
         reject(err);

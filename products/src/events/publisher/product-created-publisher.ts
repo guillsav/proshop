@@ -1,8 +1,9 @@
 import { Publisher } from './base';
-import { ProductCreatedEvent, Queues } from '../types';
+import { ProductCreatedEvent, Queues, Topics } from '../types';
 
 class ProductCreatedPublisher extends Publisher<ProductCreatedEvent> {
-  readonly queue: Queues.PRODUCT_CREATED = Queues.PRODUCT_CREATED;
+  readonly topic: Topics.PRODUCT_CREATED = Topics.PRODUCT_CREATED;
+  readonly queue: Queues.PRODUCTS = Queues.PRODUCTS;
 }
 
 export default ProductCreatedPublisher;

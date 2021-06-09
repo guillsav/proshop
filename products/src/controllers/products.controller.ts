@@ -14,14 +14,6 @@ import { amqpWrapper } from '../events/wrapper';
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
 
-declare global {
-  namespace NodeJS {
-    interface Request {
-      currentUser: UserDoc | null;
-    }
-  }
-}
-
 class ProductController extends Controller {
   @Post('/')
   public async create(
@@ -39,8 +31,12 @@ class ProductController extends Controller {
         ...product
       });
 
+      // // Closing broker's connection
+      // (await amqpWrapper).close();
+
       return res.status(CREATED).json(product);
     } catch (error) {
+      console.log(error);
       return next(
         ApiError.internal(
           "We've encounted an error while creating the product. Please try again later!"
@@ -116,6 +112,9 @@ class ProductController extends Controller {
         ...product
       });
 
+      // Closing broker's connection
+      (await amqpWrapper).close();
+
       return res.status(OK).json(product);
     } catch (error) {
       return next(
@@ -149,6 +148,9 @@ class ProductController extends Controller {
       await new ProductDeletedPublisher((await amqpWrapper).channel).publish(
         existingProduct.id
       );
+
+      // Closing broker's connection
+      (await amqpWrapper).close();
 
       return res.status(NO_CONTENT).end();
     } catch (error) {

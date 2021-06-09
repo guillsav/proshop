@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { config } from './config';
 import app from './app';
+import { broker, ProductCreatedSubscriber } from './events';
 import { connectDatabase } from './database';
 
 async function main(): Promise<void> {
@@ -8,6 +9,8 @@ async function main(): Promise<void> {
   if (!config.mongoURI) throw new Error(`MONGO_URI must be defined`);
   if (!config.jwtKey) throw new Error(`JWT_KEY must be defined`);
   if (!config.rabbitmqUrl) throw new Error(`RABBITMQ_URL must be defined`);
+
+  await new ProductCreatedSubscriber((await broker).ch).subscribe();
 
   await connectDatabase();
 
