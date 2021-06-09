@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import statusCodes from 'http-status-codes';
-
 import { logger } from '../lib';
 import { ApiError } from '../controllers';
 
