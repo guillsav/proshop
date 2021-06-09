@@ -5,6 +5,12 @@ import { ApiError } from '.';
 import { ProductService } from '../services';
 import { ProductAttrs } from '../model';
 import { UpdateProductAttrs, UserDoc } from '../lib';
+import {
+  ProductCreatedPublisher,
+  ProductDeletedPublisher,
+  ProductUpdatedPublisher
+} from '../events';
+import { amqpWrapper } from '../events/wrapper';
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
 
@@ -26,6 +32,12 @@ class ProductController extends Controller {
   ) {
     try {
       const product = await ProductService.add(body, req.currentUser!.id);
+
+      // Publish event to rabbitmq
+      await new ProductCreatedPublisher((await amqpWrapper).channel).publish({
+        id: product.id,
+        ...product
+      });
 
       return res.status(CREATED).json(product);
     } catch (error) {
@@ -98,6 +110,12 @@ class ProductController extends Controller {
 
       const product = await ProductService.update(body, existingProduct);
 
+      // Publish event to rabbitmq
+      await new ProductUpdatedPublisher((await amqpWrapper).channel).publish({
+        id: product.id,
+        ...product
+      });
+
       return res.status(OK).json(product);
     } catch (error) {
       return next(
@@ -126,6 +144,11 @@ class ProductController extends Controller {
       }
 
       await ProductService.remove(existingProduct);
+
+      // Publish event to rabbitmq
+      await new ProductDeletedPublisher((await amqpWrapper).channel).publish(
+        existingProduct.id
+      );
 
       return res.status(NO_CONTENT).end();
     } catch (error) {
