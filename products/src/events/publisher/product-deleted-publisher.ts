@@ -1,8 +1,9 @@
 import { Publisher } from './base';
-import { ProductDeletedEvent, Queues } from '../types';
+import { ProductDeletedEvent, Queues, Topics } from '../types';
 
 class ProductDeletedPublisher extends Publisher<ProductDeletedEvent> {
-  readonly queue: Queues.PRODUCT_DELETED = Queues.PRODUCT_DELETED;
+  readonly topic: Topics.PRODUCT_DELETED = Topics.PRODUCT_DELETED;
+  readonly queue: Queues.PRODUCTS = Queues.PRODUCTS;
 }
 
 export default ProductDeletedPublisher;

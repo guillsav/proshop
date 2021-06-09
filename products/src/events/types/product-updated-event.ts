@@ -1,7 +1,9 @@
 import { Queues } from './queues';
+import { Topics } from './topics';
 
 export interface ProductUpdatedEvent {
-  queue: Queues.PRODUCT_UPDATED;
+  topic: Topics.PRODUCT_UPDATED;
+  queue: Queues.PRODUCTS;
   data: {
     id: string;
     name: string;

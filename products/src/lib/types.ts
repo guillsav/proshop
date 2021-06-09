@@ -40,6 +40,7 @@ export interface Database {
 }
 
 export interface UserDoc {
+  id: string;
   name: string;
   email: string;
   password: string;

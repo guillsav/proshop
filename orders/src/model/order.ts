@@ -28,18 +28,18 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    products: {
-      type: [Product],
-      required: true
-    },
+    // products: {
+    //   type: [Product],
+    //   required: true
+    // },
     price: {
       type: Number,
       required: true
-    },
-    status: {
-      type: OrderStatus,
-      required: true
     }
+    // status: {
+    //   type: OrderStatus,
+    //   required: true
+    // }
   },
   {
     toJSON: {
