@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "amqplib": "^0.8.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
@@ -38,6 +39,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.8.0",
     "@types/cookie-session": "^2.0.42",
     "@types/cors": "^2.8.10",
     "@types/csurf": "^1.11.1",

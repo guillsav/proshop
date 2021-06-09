@@ -7,6 +7,7 @@ async function main(): Promise<void> {
   if (!config.port) throw new Error(`PORT must be defined`);
   if (!config.mongoURI) throw new Error(`MONGO_URI must be defined`);
   if (!config.jwtKey) throw new Error(`JWT_KEY must be defined`);
+  if (!config.rabbitmqUrl) throw new Error(`RABBITMQ_URL must be defined`);
 
   await connectDatabase();
 
