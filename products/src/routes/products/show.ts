@@ -5,7 +5,7 @@ import { asyncHandler } from '../../middlewares';
 const router = Router();
 
 /**
- * @api {GET} /api/v1/products/:id
+ * @api {GET} /api/v1/products/show/:id
  * @apiName View product
  * @apiGroup Products
  * @apiSuccess {Number} code HTTP status code from API.
