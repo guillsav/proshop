@@ -1,3 +1,4 @@
+import { UpdateProductAttrs } from '../lib';
 import { Product, ProductAttrs, ProductDoc } from '../model';
 
 const add = async (attrs: ProductAttrs): Promise<ProductDoc> => {
@@ -10,4 +11,12 @@ const find = async (id: string): Promise<ProductDoc | null> => {
   return product || null;
 };
 
-export default { add, find };
+const update = async (
+  updateAttrs: UpdateProductAttrs,
+  product: ProductDoc
+): Promise<ProductDoc> => {
+  await product.set({ ...updateAttrs }).save();
+  return product;
+};
+
+export default { add, find, update };

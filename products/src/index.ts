@@ -23,15 +23,5 @@ async function main(): Promise<void> {
     console.log('Closing connection');
     await (await broker).conn!.close();
   });
-
-  // process.on('SIGINT', async () => {
-  //   console.log('Closing connection');
-  //   await (await broker).conn!.close();
-  // });
-
-  // process.on('SIGTERM', async () => {
-  //   console.log('Closing connection');
-  //   await (await broker).conn!.close();
-  // });
 }
 main();
