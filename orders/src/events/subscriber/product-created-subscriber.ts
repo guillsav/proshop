@@ -7,7 +7,7 @@ class ProductCreatedSubscriber extends Subscriber<ProductCreatedEvent> {
   readonly queue: Queues.PRODUCTS = Queues.PRODUCTS;
 
   async onConsume(data: ProductCreatedEvent['data']) {
-    console.info(`[Message received]: ${this.topic} / ${this.queue}`);
+    console.info(`[MESSAGE RECEIVED]: ${this.topic} / ${this.queue}`);
 
     const existingProduct = await ProductService.find(data.id);
 

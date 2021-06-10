@@ -31,7 +31,7 @@ abstract class Publisher<T extends Event> {
         this.ch.assertQueue(this.queue, { durable: true });
         this.ch.sendToQueue(this.queue, data);
 
-        console.log(`[Message sent]: ${this.topic} / ${this.queue}`);
+        console.log(`[MESSAGE SENT]: ${this.topic} / ${this.queue}`);
 
         resolve();
       } catch (err) {
