@@ -24,7 +24,7 @@ abstract class Publisher<T extends Event> {
           throw new Error('Unable to connect to RabbitMQ Channel');
         }
 
-        const data = Buffer.from(JSON.stringify(msg._doc));
+        const data = Buffer.from(JSON.stringify(msg));
 
         console.log('Publishing event to queue', this.queue);
 

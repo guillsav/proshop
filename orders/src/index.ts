@@ -20,5 +20,20 @@ async function main(): Promise<void> {
   🚀 [API IS RUNNING AT]: https://proshop.dev/api/v1/orders
   📖 [API DOCUMENTATION AT]: http://proshop.dev/api/v1/orders/api-docs
   `);
+
+  process.on('beforeExit', async () => {
+    console.log('Closing connection');
+    await (await broker).conn!.close();
+  });
+
+  // process.on('SIGINT', async () => {
+  //   console.log('Closing connection');
+  //   await (await broker).conn!.close();
+  // });
+
+  // process.on('SIGTERM', async () => {
+  //   console.log('Closing connection');
+  //   await (await broker).conn!.close();
+  // });
 }
 main();

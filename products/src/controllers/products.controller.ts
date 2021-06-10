@@ -10,7 +10,7 @@ import {
   ProductDeletedPublisher,
   ProductUpdatedPublisher
 } from '../events';
-import { amqpWrapper } from '../events/wrapper';
+import { broker } from '../events';
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
 
@@ -26,13 +26,10 @@ class ProductController extends Controller {
       const product = await ProductService.add(body, req.currentUser!.id);
 
       // Publish event to rabbitmq
-      await new ProductCreatedPublisher((await amqpWrapper).channel).publish({
+      await new ProductCreatedPublisher((await broker).ch).publish({
         id: product.id,
         ...product
       });
-
-      // // Closing broker's connection
-      // (await amqpWrapper).close();
 
       return res.status(CREATED).json(product);
     } catch (error) {
@@ -107,13 +104,10 @@ class ProductController extends Controller {
       const product = await ProductService.update(body, existingProduct);
 
       // Publish event to rabbitmq
-      await new ProductUpdatedPublisher((await amqpWrapper).channel).publish({
+      await new ProductUpdatedPublisher((await broker).ch).publish({
         id: product.id,
         ...product
       });
-
-      // Closing broker's connection
-      (await amqpWrapper).close();
 
       return res.status(OK).json(product);
     } catch (error) {
@@ -145,12 +139,9 @@ class ProductController extends Controller {
       await ProductService.remove(existingProduct);
 
       // Publish event to rabbitmq
-      await new ProductDeletedPublisher((await amqpWrapper).channel).publish(
+      await new ProductDeletedPublisher((await broker).ch).publish(
         existingProduct.id
       );
-
-      // Closing broker's connection
-      (await amqpWrapper).close();
 
       return res.status(NO_CONTENT).end();
     } catch (error) {
