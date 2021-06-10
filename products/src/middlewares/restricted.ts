@@ -8,7 +8,7 @@ export const restricted = (req: Request, _: Response, next: NextFunction) => {
 
   const user = req.currentUser;
 
-  if (!user?.isAdmin) {
+  if (!user!.isAdmin) {
     return next(ApiError.forbidden('Forbidden access. Admin role not found.'));
   }
 

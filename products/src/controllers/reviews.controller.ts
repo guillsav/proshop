@@ -67,11 +67,11 @@ class ReviewController extends Controller {
 
       await ReviewService.remove(existingReview);
 
-      res.status(NO_CONTENT).end();
+      return res.status(NO_CONTENT).end();
     } catch (error) {
       return next(
         ApiError.internal(
-          "We've encounted an error while deleting the reviews. Please try again later!"
+          "We've encounted an error while deleting the review. Please try again later!"
         )
       );
     }
