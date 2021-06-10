@@ -1,10 +1,16 @@
 import * as express from 'express';
 import statuscodes from 'http-status-codes';
-import { Body, Controller, Delete, Get, Post, Request, Res } from 'tsoa';
+import { Body, Controller, Delete, Get, Post, Put, Request, Res } from 'tsoa';
 import { ApiError } from '.';
 import { OrderService } from '../services';
 import { OrderAttrs } from '../model';
-import { broker, OrderCreatedPublisher } from '../events';
+import {
+  broker,
+  OrderCreatedPublisher,
+  OrderDeletedPublisher,
+  OrderUpdatedPublisher
+} from '../events';
+import { UpdateOrderAttrs } from '../lib';
 
 const { CREATED, NO_CONTENT, OK } = statuscodes;
 
@@ -19,7 +25,7 @@ class OrderController extends Controller {
     try {
       const order = await OrderService.add(body, req.currentUser!.id);
 
-      // Publish event to broker
+      // Publish message to broker
       await new OrderCreatedPublisher((await broker).ch).publish({
         id: order.id,
         status: order.status,
@@ -74,11 +80,47 @@ class OrderController extends Controller {
         return next(ApiError.unauthorized('Invalid credentials'));
       }
 
-      res.status(OK).json(order);
+      return res.status(OK).json(order);
     } catch (error) {
       return next(
         ApiError.internal(
           "We've encounted an error while looking for the order. Please try again later!"
+        )
+      );
+    }
+  }
+
+  @Put('/')
+  public async update(
+    @Request() req: express.Request,
+    @Res() res: express.Response,
+    next: express.NextFunction,
+    @Body() body: UpdateOrderAttrs
+  ) {
+    try {
+      const existingOrder = await OrderService.find(req.params.id);
+
+      if (!existingOrder) {
+        return next(ApiError.notFound('Order not found'));
+      }
+
+      if (existingOrder.userId !== req.currentUser!.id) {
+        return next(ApiError.unauthorized('Invalid credentials'));
+      }
+
+      const order = await OrderService.update(body, existingOrder);
+
+      // Publish message to broker
+      await new OrderUpdatedPublisher((await broker).ch).publish({
+        ...order,
+        id: order.id
+      });
+
+      return res.status(OK).json(order);
+    } catch (error) {
+      return next(
+        ApiError.internal(
+          "We've encounted an error while updating the order. Please try again later!"
         )
       );
     }
@@ -102,6 +144,12 @@ class OrderController extends Controller {
       }
 
       await OrderService.remove(existingOrder);
+
+      // Publish message to broker
+      await new OrderDeletedPublisher((await broker).ch).publish({
+        id: existingOrder.id,
+        version: existingOrder.version
+      });
 
       return res.status(NO_CONTENT).end();
     } catch (error) {

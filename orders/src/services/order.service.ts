@@ -1,3 +1,4 @@
+import { UpdateOrderAttrs } from '../lib';
 import { Order, OrderAttrs, OrderDoc } from '../model';
 
 const add = async (attrs: OrderAttrs, userId: string): Promise<OrderDoc> => {
@@ -17,9 +18,17 @@ const find = async (id: string): Promise<OrderDoc | null> => {
   return order || null;
 };
 
+const update = async (
+  updateAttrs: UpdateOrderAttrs,
+  order: OrderDoc
+): Promise<OrderDoc> => {
+  await order.set({ ...updateAttrs }).save();
+  return order;
+};
+
 const remove = async (order: OrderDoc) => {
   await order.delete();
   return true;
 };
 
-export default { add, fetch, find, remove };
+export default { add, fetch, find, remove, update };

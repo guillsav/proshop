@@ -26,19 +26,24 @@ export const createOrderValidation = async (
   return await validate(schema, req.body, req, next);
 };
 
-export const updateProductValidation = async (
+export const updateOrderValidation = async (
   req: Request,
   _: Response,
   next: NextFunction
 ): Promise<void> => {
   const schema = Yup.object().shape({
-    name: Yup.string().trim().min(3).max(128),
-    image: Yup.string().trim().min(3).max(255),
-    brand: Yup.string().trim().min(3).max(128),
-    category: Yup.string().trim().min(3).max(128),
-    description: Yup.string().trim().max(500),
+    products: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().trim().min(3).max(128),
+        brand: Yup.string().trim().min(3).max(128),
+        category: Yup.string().trim().min(3).max(128),
+        description: Yup.string().trim().max(500),
+        price: Yup.number().default(0),
+        countInStock: Yup.number().default(0)
+      })
+    ),
     price: Yup.number().default(0),
-    countInStock: Yup.number().default(0)
+    status: Yup.string().trim().min(3).max(128)
   });
 
   return await validate(schema, req.body, req, next);

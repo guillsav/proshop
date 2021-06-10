@@ -1,7 +1,11 @@
 import 'dotenv/config';
 import { config } from './config';
 import app from './app';
-import { broker, ProductCreatedSubscriber } from './events';
+import {
+  broker,
+  ProductCreatedSubscriber,
+  ProductUpdatedSubscriber
+} from './events';
 import { connectDatabase } from './database';
 
 async function main(): Promise<void> {
@@ -11,6 +15,7 @@ async function main(): Promise<void> {
   if (!config.rabbitmqUrl) throw new Error(`RABBITMQ_URL must be defined`);
 
   await new ProductCreatedSubscriber((await broker).ch).subscribe();
+  await new ProductUpdatedSubscriber((await broker).ch).subscribe();
 
   await connectDatabase();
 
@@ -25,15 +30,5 @@ async function main(): Promise<void> {
     console.log('Closing connection');
     await (await broker).conn!.close();
   });
-
-  // process.on('SIGINT', async () => {
-  //   console.log('Closing connection');
-  //   await (await broker).conn!.close();
-  // });
-
-  // process.on('SIGTERM', async () => {
-  //   console.log('Closing connection');
-  //   await (await broker).conn!.close();
-  // });
 }
 main();

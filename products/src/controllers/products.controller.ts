@@ -6,11 +6,11 @@ import { ProductService } from '../services';
 import { ProductAttrs } from '../model';
 import { UpdateProductAttrs, UserDoc } from '../lib';
 import {
+  broker,
   ProductCreatedPublisher,
   ProductDeletedPublisher,
   ProductUpdatedPublisher
 } from '../events';
-import { broker } from '../events';
 
 const { CREATED, NO_CONTENT, OK } = statusCodes;
 
