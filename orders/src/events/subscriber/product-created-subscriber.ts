@@ -1,6 +1,6 @@
 import { Subscriber } from './base';
 import { Queues, ProductCreatedEvent, Topics } from '../types';
-import { Product } from '../../model';
+import { ProductService } from '../../services';
 
 class ProductCreatedSubscriber extends Subscriber<ProductCreatedEvent> {
   readonly topic: Topics.PRODUCT_CREATED = Topics.PRODUCT_CREATED;
@@ -9,13 +9,13 @@ class ProductCreatedSubscriber extends Subscriber<ProductCreatedEvent> {
   async onConsume(data: ProductCreatedEvent['data']) {
     console.info(`[Message received]: ${this.topic} / ${this.queue}`);
 
-    const existingProduct = await Product.findById(data.id);
+    const existingProduct = await ProductService.find(data.id);
 
     if (existingProduct) {
       throw new Error('Product already added to db');
     }
 
-    const product = await Product.build({ ...data }).save();
+    const product = await ProductService.add(data);
 
     if (product) {
       console.log('Added product to orders service db');
