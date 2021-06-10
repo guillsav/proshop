@@ -22,11 +22,11 @@ export interface ProductDoc extends mongoose.Document {
   version: number;
 }
 
-interface ProductModel extends mongoose.Model<ProductDoc> {
+export interface ProductModel extends mongoose.Model<ProductDoc> {
   build(attrs: ProductAttrs): ProductDoc;
 }
 
-const productSchema = new mongoose.Schema(
+export const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,

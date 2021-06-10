@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
-import Product, { ProductDoc } from './product';
+import { ProductDoc, productSchema } from './product';
 import { OrderStatus } from '../events';
 
 export interface OrderAttrs {
@@ -28,18 +28,16 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    // products: {
-    //   type: [Product],
-    //   required: true
-    // },
+    products: [productSchema],
     price: {
       type: Number,
       required: true
+    },
+    status: {
+      type: String,
+      default: 'CREATED',
+      required: true
     }
-    // status: {
-    //   type: OrderStatus,
-    //   required: true
-    // }
   },
   {
     toJSON: {
