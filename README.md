@@ -110,7 +110,7 @@ code /etc/hosts
 code C:\Windows\System32\Drivers\etc\hosts
 ```
 
-Then paste the following at the bottom: **`127.0.0.1 proshop.dev`**
+Then paste the following at the bottom: `127.0.0.1 proshop.dev`
 
 6. Install Skaffold by following the instructions at `skaffold.dev/docs/install/`
 
