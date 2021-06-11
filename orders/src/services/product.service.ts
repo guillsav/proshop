@@ -19,4 +19,9 @@ const update = async (
   return product;
 };
 
-export default { add, find, update };
+const remove = async (product: ProductDoc): Promise<boolean> => {
+  await product.delete();
+  return true;
+};
+
+export default { add, find, remove, update };
