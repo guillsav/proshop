@@ -26,7 +26,7 @@ const update = async (
   return order;
 };
 
-const remove = async (order: OrderDoc) => {
+const remove = async (order: OrderDoc): Promise<boolean> => {
   await order.delete();
   return true;
 };

@@ -1,11 +1,11 @@
 interface Config {
   mongoURI: string;
-  port: string;
+  port: number;
   jwtKey: string;
 }
 
 export const config: Config = {
   mongoURI: process.env.MONGO_URI!,
-  port: process.env.PORT!,
+  port: <number>(<unknown>process.env.PORT!),
   jwtKey: process.env.JWT_KEY!
 };

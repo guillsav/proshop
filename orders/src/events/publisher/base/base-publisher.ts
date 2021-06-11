@@ -18,7 +18,7 @@ abstract class Publisher<T extends Event> {
    * @param {Object} msg Message as Buffer
    */
   async publish(msg: T['data']): Promise<void> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
         if (!this.ch) {
           throw new Error('Unable to connect to RabbitMQ Channel');
@@ -29,7 +29,11 @@ abstract class Publisher<T extends Event> {
         console.log('Publishing event to queue', this.queue);
 
         this.ch.assertQueue(this.queue, { durable: true });
-        this.ch.sendToQueue(this.queue, data);
+        const result = this.ch.sendToQueue(this.queue, data);
+
+        if (!result) {
+          await new Promise(resolve => this.ch!.once('drain', () => resolve));
+        }
 
         console.log(`[MESSAGE SENT]: ${this.topic} / ${this.queue}`);
 

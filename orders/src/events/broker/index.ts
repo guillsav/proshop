@@ -37,8 +37,9 @@ class Broker {
   }
 
   close() {
-    if (this._conn) {
+    if (this._ch) {
       setTimeout(() => {
+        this._ch!.close();
         this._conn!.close();
       }, 1000);
     }
