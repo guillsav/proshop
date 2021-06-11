@@ -9,7 +9,7 @@ import {
   notFound,
   removeHeader
 } from './middlewares';
-// import routes from './routes';
+import routes from './routes';
 
 const app = express();
 const cookieOptions = cookieSession({
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cookieOptions);
-// app.use('/api/v1/orders', attachUser, routes);
+app.use('/api/v1/payments', attachUser, routes);
 app.use('*', notFound);
 app.use(apiErrorHandler);
 
