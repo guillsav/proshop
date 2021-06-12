@@ -60,7 +60,7 @@ Backend services were built using:
 
 - ODM for MongoDB database.
 
-### _RabbitMQ_
+#### _RabbitMQ_
 
 - To ensure communication between backend services, using the Pub/Sub approach.
 
