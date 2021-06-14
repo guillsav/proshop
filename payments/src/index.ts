@@ -26,7 +26,7 @@ async function main(): Promise<void> {
   // await new ProductDeletedSubscriber((await broker).ch).subscribe();
 
   // Connecting to MongoDB
-  // await connectDatabase();
+  await connectDatabase();
 
   app.listen(config.port, () =>
     console.info(`
