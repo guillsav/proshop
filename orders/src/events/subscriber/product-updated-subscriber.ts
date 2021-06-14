@@ -1,6 +1,7 @@
 import { Subscriber } from './base';
 import { Queues, ProductUpdatedEvent, Topics } from '../types';
 import { ProductService } from '../../services';
+import { broker } from '../broker';
 
 class ProductUpdatedSubscriber extends Subscriber<ProductUpdatedEvent> {
   readonly topic: Topics.PRODUCT_UPDATED = Topics.PRODUCT_UPDATED;
@@ -20,4 +21,4 @@ class ProductUpdatedSubscriber extends Subscriber<ProductUpdatedEvent> {
   }
 }
 
-export default ProductUpdatedSubscriber;
+export default new ProductUpdatedSubscriber((await broker).ch);

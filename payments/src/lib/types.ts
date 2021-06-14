@@ -8,7 +8,7 @@ export interface Order {
   version?: number;
 }
 
-export interface UpdateOrderttrs {
+export interface UpdateOrderAttrs {
   status?: OrderStatus;
   price?: number;
   userId?: string;
@@ -19,6 +19,15 @@ export interface Payment {
   _id?: string;
   orderId: string;
   stripeId: string;
+}
+
+export interface CreatePaymenAtrrs {
+  orderId: string;
+  token: string;
+}
+export interface UpdatePaymentAttrs {
+  orderId?: string;
+  token?: string;
 }
 
 export interface Database {

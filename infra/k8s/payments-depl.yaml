@@ -32,6 +32,11 @@ spec:
                 secretKeyRef:
                   name: rabbitmq-url
                   key: RABBITMQ_URL
+            - name: STRIPE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-key
+                  key: STRIPE_KEY
 ---
 apiVersion: v1
 kind: Service

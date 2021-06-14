@@ -1,4 +1,5 @@
 import { Publisher } from './base';
+import { broker } from '../broker';
 import { Queues, OrderCreatedEvent, Topics } from '../types';
 
 class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
@@ -6,4 +7,4 @@ class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
   readonly queue: Queues.ORDERS = Queues.ORDERS;
 }
 
-export default OrderCreatedPublisher;
+export default new OrderCreatedPublisher((await broker).ch);
