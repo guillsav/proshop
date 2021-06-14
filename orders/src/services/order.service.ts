@@ -19,8 +19,8 @@ const find = async (id: string): Promise<OrderDoc | null> => {
 };
 
 const update = async (
-  updateAttrs: UpdateOrderAttrs,
-  order: OrderDoc
+  order: OrderDoc,
+  updateAttrs: UpdateOrderAttrs
 ): Promise<OrderDoc> => {
   await order.set({ ...updateAttrs }).save();
   return order;

@@ -31,6 +31,7 @@
     "mongoose": "^5.12.11",
     "mongoose-update-if-current": "^1.4.0",
     "morgan": "^1.10.0",
+    "stripe": "^8.154.0",
     "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.1.6",
     "tsoa": "^3.8.0",

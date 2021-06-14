@@ -5,7 +5,6 @@ import { ApiError } from '.';
 import { OrderService } from '../services';
 import { OrderAttrs } from '../model';
 import {
-  broker,
   OrderCreatedPublisher,
   OrderDeletedPublisher,
   OrderUpdatedPublisher
@@ -26,7 +25,7 @@ class OrderController extends Controller {
       const order = await OrderService.add(body, req.currentUser!.id);
 
       // Publish message to broker
-      await new OrderCreatedPublisher((await broker).ch).publish({
+      await OrderCreatedPublisher.publish({
         id: order.id,
         status: order.status,
         userId: order.userId,
@@ -111,7 +110,7 @@ class OrderController extends Controller {
       const order = await OrderService.update(body, existingOrder);
 
       // Publish message to broker
-      await new OrderUpdatedPublisher((await broker).ch).publish({
+      await OrderUpdatedPublisher.publish({
         ...order,
         id: order.id
       });
@@ -146,7 +145,7 @@ class OrderController extends Controller {
       await OrderService.remove(existingOrder);
 
       // Publish message to broker
-      await new OrderDeletedPublisher((await broker).ch).publish({
+      await OrderDeletedPublisher.publish({
         id: existingOrder.id,
         version: existingOrder.version
       });

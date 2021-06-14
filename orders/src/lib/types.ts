@@ -17,6 +17,7 @@ export interface UpdateOrderAttrs {
   products?: [ProductDoc];
   price?: number;
   status?: OrderStatus;
+  version?: number;
 }
 
 export interface Product {

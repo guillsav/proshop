@@ -7,5 +7,7 @@ export enum Topics {
   ORDER_CREATED = 'order:created',
   ORDER_UPDATED = 'order:updated',
   ORDER_COMPLETED = 'order:completed',
-  ORDER_DELETED = 'order:deleted'
+  ORDER_DELETED = 'order:deleted',
+  // Payments
+  PAYMENT_CREATED = 'payment:created'
 }

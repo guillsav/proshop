@@ -6,7 +6,6 @@ import { ProductService } from '../services';
 import { ProductAttrs } from '../model';
 import { UpdateProductAttrs, UserDoc } from '../lib';
 import {
-  broker,
   ProductCreatedPublisher,
   ProductDeletedPublisher,
   ProductUpdatedPublisher
@@ -26,7 +25,7 @@ class ProductController extends Controller {
       const product = await ProductService.add(body, req.currentUser!.id);
 
       // Publish event to rabbitmq
-      await new ProductCreatedPublisher((await broker).ch).publish({
+      await ProductCreatedPublisher.publish({
         id: product.id,
         ...product
       });
@@ -104,7 +103,7 @@ class ProductController extends Controller {
       const product = await ProductService.update(body, existingProduct);
 
       // Publish event to rabbitmq
-      await new ProductUpdatedPublisher((await broker).ch).publish({
+      await ProductUpdatedPublisher.publish({
         id: product.id,
         ...product
       });
@@ -139,9 +138,7 @@ class ProductController extends Controller {
       await ProductService.remove(existingProduct);
 
       // Publish event to rabbitmq
-      await new ProductDeletedPublisher((await broker).ch).publish(
-        existingProduct.id
-      );
+      await ProductDeletedPublisher.publish(existingProduct.id);
 
       return res.status(NO_CONTENT).end();
     } catch (error) {

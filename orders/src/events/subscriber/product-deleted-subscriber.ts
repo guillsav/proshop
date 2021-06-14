@@ -1,6 +1,7 @@
 import { Subscriber } from './base';
 import { Queues, ProductDeletedEvent, Topics } from '../types';
 import { ProductService } from '../../services';
+import { broker } from '../broker';
 
 class ProductDeletedSubscriber extends Subscriber<ProductDeletedEvent> {
   readonly topic: Topics.PRODUCT_DELETED = Topics.PRODUCT_DELETED;
@@ -18,4 +19,4 @@ class ProductDeletedSubscriber extends Subscriber<ProductDeletedEvent> {
   }
 }
 
-export default ProductDeletedSubscriber;
+export default new ProductDeletedSubscriber((await broker).ch);
