@@ -1,42 +1,29 @@
 import { Collection, ObjectId } from 'mongodb';
 
-export interface Product {
+export interface Order {
   _id?: ObjectId;
-  name: string;
-  image: string;
-  description: string;
-  brand: string;
-  category: string;
+  status: OrderStatus;
   price: number;
-  countInStock: number;
-  rating: number;
-  numReviews: number;
   userId: string;
   version?: number;
 }
 
-export interface UpdateProductAttrs {
-  name?: string;
-  image?: string;
-  description?: string;
-  brand?: string;
-  category?: string;
+export interface UpdateOrderttrs {
+  status?: OrderStatus;
   price?: number;
-  countInStock?: number;
-  rating?: number;
-  numReviews?: number;
-}
-
-export interface Review {
-  _id?: string;
-  name: string;
-  comment: string;
+  userId?: string;
   version?: number;
 }
 
+export interface Payment {
+  _id?: string;
+  orderId: string;
+  stripeId: string;
+}
+
 export interface Database {
-  products: Collection<Product>;
-  reviews: Collection<Review>;
+  orders: Collection<Order>;
+  payments: Collection<Payment>;
 }
 
 export interface UserDoc {
@@ -45,4 +32,11 @@ export interface UserDoc {
   email: string;
   password: string;
   isAdmin: boolean;
+}
+
+export enum OrderStatus {
+  CREATED = 'CREATED',
+  CANCELLED = 'CANCELLED',
+  AWAITING_PAYMENT = 'AWAITING_PAYMENT',
+  COMPLETE = 'COMPLETE'
 }
