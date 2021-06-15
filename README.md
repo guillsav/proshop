@@ -75,7 +75,7 @@ Handles secure payment from customers after an order is placed and received by t
 
 ## **Environment Variables and Kubernetes Secrets**
 
-In order for the app to function correctly, Kubernetes secrets must be provided to the kubernetes cluster. Run the command below and replace `<SECRET>` with your own values.
+In order for the app to function correctly, Kubernetes secrets must be provided to the Kubernetes cluster. Run the command below and replace `<SECRET>` with your own values.
 
 ```
 <!-- Long string used to validate token from the jsonwebtoken library -->
