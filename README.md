@@ -103,7 +103,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/co
 $ code /etc/hosts
 
 <!-- Otherwise -->
-$ cd /etc/hosts`
+$ cd /etc/hosts
 
 ```
 
