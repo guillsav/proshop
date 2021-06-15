@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { config } from './config';
 import app from './app';
 import { connectDatabase } from './database';
-import { broker } from './events';
+import { broker, OrderCompletedSubscriber } from './events';
 
 async function main(): Promise<void> {
   if (!config.port) throw new Error(`PORT must be defined`);
@@ -11,6 +11,9 @@ async function main(): Promise<void> {
   if (!config.rabbitmqUrl) throw new Error(`RABBITMQ_URL must be defined`);
 
   await connectDatabase();
+
+  // Subscribing to broker's queues.
+  await OrderCompletedSubscriber.subscribe();
 
   app.listen(config.port);
 

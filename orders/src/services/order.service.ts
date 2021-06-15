@@ -14,7 +14,7 @@ const fetch = async (userId: string): Promise<OrderDoc[]> => {
 };
 
 const find = async (id: string): Promise<OrderDoc | null> => {
-  const order = await Order.findById(id);
+  const order = await Order.findById(id).populate('products');
   return order || null;
 };
 

@@ -46,3 +46,18 @@ export interface UserDoc {
   password: string;
   isAdmin: boolean;
 }
+
+export interface ProductEvent {
+  id: string;
+  name: string;
+  image: string;
+  brand: string;
+  category: string;
+  description: string;
+  rating: number;
+  numReviews: number;
+  price: number;
+  countInStock: number;
+  userId: string;
+  version: number;
+}

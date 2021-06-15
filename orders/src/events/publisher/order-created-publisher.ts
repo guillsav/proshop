@@ -1,6 +1,6 @@
 import { Publisher } from './base';
 import { broker } from '../broker';
-import { Queues, OrderCreatedEvent, Topics } from '../types';
+import { OrderCreatedEvent, Queues, Topics } from '../types';
 
 class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
   readonly topic: Topics.ORDER_CREATED = Topics.ORDER_CREATED;

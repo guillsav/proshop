@@ -1,6 +1,7 @@
 export * from './queues';
 export * from './order-status';
 export * from './order-created-event';
+export * from './order-completed-event';
 export * from './order-deleted-event';
 export * from './order-updated-event';
 export * from './payment-created-event';
