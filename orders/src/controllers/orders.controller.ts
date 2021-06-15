@@ -107,7 +107,7 @@ class OrderController extends Controller {
         return next(ApiError.unauthorized('Invalid credentials'));
       }
 
-      const order = await OrderService.update(body, existingOrder);
+      const order = await OrderService.update(existingOrder, body);
 
       // Publish message to broker
       await OrderUpdatedPublisher.publish({

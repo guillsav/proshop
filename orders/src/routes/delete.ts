@@ -5,7 +5,7 @@ import { OrderController } from '../controllers';
 const router = Router();
 
 /**
- * @api {DELETE} /api/v1/orders/delete
+ * @api {DELETE} /api/v1/orders/delete/:id
  * @apiName Delete order
  * @apiGroup Orders
  * @apiSuccess {Number} code HTTP status code from API.
