@@ -72,7 +72,11 @@ Backend services were built using:
 
 To handle secure payments from customers after an order is placed and received by the payments service.
 
+<<<<<<< HEAD
 ## **How to run the app**
+=======
+In order for the app to function correctly, Kubernetes secrets must be provided to the Kubernetes cluster. Run the command below and replace `<SECRET>` with your own values.
+>>>>>>> 98f53260a974e24902e99856cef1a7277af2fbb1
 
 In order to run the app locally a little bit of work is needed.
 

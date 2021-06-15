@@ -1,4 +1,4 @@
-import { ProductDoc } from '../../model';
+import { OrderProduct } from '../../lib';
 import { OrderStatus } from './order-status';
 import { Queues } from './queues';
 import { Topics } from './topics';
@@ -9,7 +9,7 @@ export interface OrderCreatedEvent {
   data: {
     id: string;
     userId: string;
-    products: [ProductDoc];
+    products: OrderProduct[];
     price: number;
     status: OrderStatus;
   };

@@ -2,11 +2,12 @@ import { Subscriber } from './base';
 import { OrderStatus, PaymentCreatedEvent, Queues, Topics } from '../types';
 import { OrderService } from '../../services';
 import { broker } from '../broker';
-import { OrderUpdatedPublisher } from '../publisher';
+import { OrderCompletedPublisher } from '../publisher';
+import { OrderProduct } from '../../lib';
 
 class PaymentCreatedSubscriber extends Subscriber<PaymentCreatedEvent> {
-  topic: Topics.PAYMENT_CREATED = Topics.PAYMENT_CREATED;
-  queue: Queues.PAYMENTS = Queues.PAYMENTS;
+  readonly queue: PaymentCreatedEvent['queue'] = Queues.PAYMENTS;
+  readonly topic: PaymentCreatedEvent['topic'] = Topics.PAYMENT_CREATED;
 
   async onConsume(data: PaymentCreatedEvent['data']) {
     console.info(`[MESSAGE RECEIVED]: ${this.topic} / ${this.queue}`);
@@ -22,13 +23,14 @@ class PaymentCreatedSubscriber extends Subscriber<PaymentCreatedEvent> {
       version: order.version + 1
     });
 
-    await OrderUpdatedPublisher.publish({
-      id: updatedOrder.id,
-      price: updatedOrder.price,
-      products: updatedOrder.products,
-      status: updatedOrder.status,
-      userId: updatedOrder.userId
+    const products: OrderProduct[] = updatedOrder.products.map(product => {
+      return {
+        ...product,
+        countInStock: product.countInStock - product.quantity
+      };
     });
+
+    await OrderCompletedPublisher.publish({ products });
 
     return;
   }
