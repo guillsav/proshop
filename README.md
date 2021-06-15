@@ -16,6 +16,9 @@ Proshop is an E-commerce microservice app where uses can view a listing of Prosh
 Proshop is powered by serveral services running in a Kubernetes cluster. Proshop uses an event driven microservices architecture, and make use of Message queues to
 ensure communication between services. In order to route requests to the appropriate service, Proshop uses an NGINX reverse proxy, with the help of the Kubernetes Ingress-nginx controller.
 
+
+![alt text](https://github.com/guillsav/proshop-microservice/blob/main/screenshots/Screen%20Shot%202021-06-15%20at%2012.22.21%20PM.png)
+
 ### **Services Details**
 
 #### **_Front end service_**
