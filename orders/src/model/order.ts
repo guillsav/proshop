@@ -1,18 +1,18 @@
 import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
-import { ProductDoc } from './product';
+import { OrderProduct } from '../lib';
 import { OrderStatus } from '../events';
 
 export interface OrderAttrs {
   userId: string;
-  products: [ProductDoc];
+  products: OrderProduct[];
   price: number;
   status: OrderStatus;
 }
 
 export interface OrderDoc extends mongoose.Document {
   userId: string;
-  products: [ProductDoc];
+  products: OrderProduct[];
   price: number;
   status: OrderStatus;
   version: number;
@@ -30,21 +30,16 @@ const orderSchema = new mongoose.Schema(
     },
     products: [
       {
-        product: {
-          id: {
-            type: mongoose.Types.ObjectId,
-            required: true,
-            ref: 'products'
-          },
-          name: { type: String, required: true },
-          image: { type: String },
-          brand: { type: String, required: true },
-          category: { type: String, required: true },
-          description: { type: String },
-          price: { type: Number, required: true, default: 0 },
-          countInStock: { type: Number, required: true, default: 0 }
-        },
-        quantity: { type: Number, required: true, default: 0 }
+        id: { type: String, required: true },
+        name: { type: String, required: true },
+        image: { type: String },
+        brand: { type: String, required: true },
+        category: { type: String, required: true },
+        description: { type: String },
+        price: { type: Number, required: true, default: 0 },
+        countInStock: { type: Number, required: true, default: 0 },
+        quantity: { type: Number, required: true, default: 0 },
+        version: { type: Number, required: true }
       }
     ],
     price: {
