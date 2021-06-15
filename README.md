@@ -78,11 +78,14 @@ Handles secure payment from customers after an order is placed and received by t
 In order for the app to function correctly, Kubernetes secrets must be provided to the kubernetes cluster. Run the command below and replace `<SECRET>` with your own values.
 
 ```
-<!-- long string used to validate token from the jsonwebtoken library -->
-$ kubectl create secret generic jwt-secret --from-literal=JWT_KEY=<SECRET>
+<!-- Long string used to validate token from the jsonwebtoken library -->
+$ kubectl create secret generic jwt-secret --from-literal JWT_KEY=<SECRET>
 
 <!-- RabbitMQ url provided by creating an account to Cloud AMQP -->
-$ kubectl create secret generic rabbitmq-url --from-literal=RABBITMQ_URL=<SECRET>
+$ kubectl create secret generic rabbitmq-url --from-literal RABBITMQ_URL=<SECRET>
+
+<!-- Stripe api key provided by Stripe.com -->
+$ kubectl create secret generic stripe-key --from-literal STRIPE_KEY=<SECRET>
 
 ```
 
