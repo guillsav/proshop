@@ -4,6 +4,13 @@ import { asyncHandler, createPaymentValidation } from '../middlewares';
 
 const router = Router();
 
+/**
+ * @api {POST} /api/v1/payments/create
+ * @apiName Create payment
+ * @apiGroup Payments
+ * @apiSuccess {Number} code HTTP status code from API.
+ * @apiSuccess {Object} Created payment.
+ */
 router.post(
   '/',
   createPaymentValidation,
