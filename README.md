@@ -22,8 +22,8 @@ Proshop is powered by several services running in a Kubernetes cluster. All back
 
 #### **_Front End Service (React)_**
 
-- Catalog service
-- Admin service
+- Catalog service front end app to display products, and allows users to buy products.
+- Admin service CMS for admin users.
 
 #### **_Back End Services (NodeJS Express)_**
 
