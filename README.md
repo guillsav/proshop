@@ -41,7 +41,7 @@ Proshop is powered by several services running in a Kubernetes cluster. All back
 
 #### **_Communication Service_**
 
-- RabbitMQ message broker (Cloud AMQP and amqlib) enables communication between services.
+- RabbitMQ message broker (CloudAMQP and amqlib) enables communication between services.
 
 ## **Tech Stack**
 
@@ -126,13 +126,13 @@ Then, paste the following at the bottom of the file: `127.0.0.1 proshop.dev`
 
 ## **Environment Variables and Kubernetes Secrets**
 
-Kubernetes secrets (like Stripe api_key, Cloud AMQP url, etc...) must be provided to the Kubernetes cluster to avoid runtime errors. Run the commands below and replace `<SECRET>` with your own values coming from your own stripe account or Cloud AMQP account, etc...
+Kubernetes secrets (like Stripe api_key, CloudAMQP url, etc...) must be provided to the Kubernetes cluster to avoid runtime errors. Run the commands below and replace `<SECRET>` with your own values coming from your own stripe account or CloudAMQP account, etc...
 
 ```console
 <!-- Long string used to validate token from the jsonwebtoken library. You can use a password generator like lastPass to generate this string -->
 $ kubectl create secret generic jwt-secret --from-literal JWT_KEY=<SECRET>
 
-<!-- RabbitMQ url provided by creating an account in Cloud AMQP -->
+<!-- RabbitMQ url provided by creating an account in CloudAMQP -->
 $ kubectl create secret generic rabbitmq-url --from-literal RABBITMQ_URL=<SECRET>
 
 <!-- Stripe api key provided by Stripe.com -->
