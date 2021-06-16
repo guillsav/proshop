@@ -31,14 +31,14 @@ Proshop is powered by several services running in a Kubernetes cluster. All back
 - [Orders service](https://github.com/guillsav/proshop-microservice/tree/main/orders) manages orders resources.
 - [Payments service](https://github.com/guillsav/proshop-microservice/tree/main/payments) handles and processes payments resources.
 
-#### Database Services (MongoDB)
+#### **_Database Services (MongoDB)_**
 
 - Auth database with 1 collection for Users.
 - Products database with 2 collections for Products and Reviews.
 - Orders database with 2 collections for Orders and Products.
 - Payments database with 2 collections for Orders and Payments.
 
-#### Communication Service
+#### **_Communication Service_**
 
 - RabbitMQ message broker (Cloud AMQP and amqlib) enables communication between services.
 
