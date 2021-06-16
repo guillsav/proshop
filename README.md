@@ -14,7 +14,7 @@ ensure communication between services.
 
 ## **Architecture**
 
-Proshop is powered by several services running in a Kubernetes cluster. All backend services are built with NodeJS Express and sits behind a Nginx reverse proxy service in order to route requests to the appropriate backend service (API). The reverse proxy makes use of the Kubernetes Ingress Controller. See the config file for the reverse proxy at `infra/k8s/ingress-srv.yaml` for more details.
+Proshop is powered by several services running in a Kubernetes cluster. All backend services are built with NodeJS Express and sits behind an Nginx reverse proxy service in order to route requests to the appropriate backend service (API). The reverse proxy makes use of the Kubernetes Ingress Controller. See the config file for the reverse proxy at `infra/k8s/ingress-srv.yaml` for more details.
 
 ![alt text](https://github.com/guillsav/proshop-microservice/blob/main/screenshots/Screen%20Shot%202021-06-15%20at%2012.22.21%20PM.png)
 
