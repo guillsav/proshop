@@ -64,7 +64,7 @@ Backend services were built using:
 
 #### _RabbitMQ_
 
-- To ensure communication between backend services, using the Pub/Sub approach.
+- To ensure communication between backend services, using the `Pub/Sub` approach.
 
 ### **Third Party APIs**
 
