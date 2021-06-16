@@ -20,9 +20,10 @@ Proshop is powered by several services running in a Kubernetes cluster. All back
 
 ### **Services Details**
 
-#### **_Front End Service_**
+#### **_Front End Service (React)_**
 
-- Client service (React app)
+- Catalog service
+- Admin service
 
 #### **_Back End Services (NodeJS Express)_**
 
