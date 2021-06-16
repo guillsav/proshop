@@ -60,7 +60,7 @@ Backend services were built using:
 
 #### _Mongoose_
 
-- The object data model (ODM) to manipulate data from the MongoDB database.
+- Object data model (ODM) to manipulate data from the MongoDB database.
 
 #### _RabbitMQ_
 
